@@ -1,0 +1,26 @@
+version: '3'
+services:
+  news_scrapper:
+    image: alwaly/news_scrapper:latest
+    container_name: news_scrapper
+    hostname: news_scrapper
+    build: .
+    ports:
+      - "8081:8081"
+    networks:
+      - api_network
+    depends_on:
+      - scrapping_db
+
+  scrapping_db:
+    image: mongo:5.0.22
+    ports:
+      - "27017:27017"
+    networks:
+      - api_network
+    volumes:
+      - ./data:/data/db
+
+networks:
+  api_network: 
+    driver: bridge
