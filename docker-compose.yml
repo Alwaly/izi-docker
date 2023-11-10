@@ -1,18 +1,19 @@
 version: '3'
+
 services:
-  news_scrapper:
-    image: alwaly/news_scrapper:latest
-    container_name: news_scrapper
-    hostname: news_scrapper
-    build: .
+  backend_izi_bot:
+    image: alwaly/backend_izi_bot
+    build:
+      context: ./api
     ports:
       - "8081:8081"
     networks:
       - api_network
     depends_on:
-      - scrapping_db
+      - mongo_database
+      - qdrant
 
-  scrapping_db:
+  mongo_database:
     image: mongo:5.0.22
     ports:
       - "27017:27017"
@@ -20,6 +21,26 @@ services:
       - api_network
     volumes:
       - ./data:/data/db
+
+  qdrant:
+    image: qdrant/qdrant
+    ports:
+      - "6333:6333"
+    networks:
+      - api_network
+    volumes:
+      - ./data:/data/db
+
+  frontend_izi_bot:
+    image: alwaly/frontend_izi_bot
+    build:
+      context: ./front
+    ports:
+      - "80:80"
+    networks:
+      - api_network
+    depends_on:
+      - backend_izi_bot
 
 networks:
   api_network: 
