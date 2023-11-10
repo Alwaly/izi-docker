@@ -36,7 +36,7 @@ services:
     build:
       context: ./front
     ports:
-      - "80:80"
+      - "8000:8000"
     networks:
       - api_network
     depends_on:
