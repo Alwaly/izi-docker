@@ -28,8 +28,6 @@ services:
       - "6333:6333"
     networks:
       - api_network
-    volumes:
-      - ./data:/data/db
 
   frontend_izi_bot:
     image: alwaly/frontend_izi_bot
