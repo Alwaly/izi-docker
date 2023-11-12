@@ -17,7 +17,7 @@ services:
     networks:
       - api_network
     volumes:
-      - mongo_data:/var/lib/mongo
+      - ./data:/data/db
 
   qdrant:
     image: qdrant/qdrant
@@ -29,6 +29,3 @@ services:
 networks:
   api_network: 
     driver: bridge
-
-volumes:
-  mongo_data:
