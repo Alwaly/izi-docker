@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   backend_izi_bot:
     image: alwaly/backend_izi_bot
@@ -18,7 +17,7 @@ services:
     networks:
       - api_network
     volumes:
-      - ./data:/data/db
+      - mongo_data:/var/lib/mongo
 
   qdrant:
     image: qdrant/qdrant
@@ -30,3 +29,6 @@ services:
 networks:
   api_network: 
     driver: bridge
+
+volumes:
+  mongo_data:
