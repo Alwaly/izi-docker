@@ -27,15 +27,6 @@ services:
     networks:
       - api_network
 
-  frontend_izi_bot:
-    image: alwaly/frontend_izi_bot
-    ports:
-      - "8000:8000"
-    networks:
-      - api_network
-    depends_on:
-      - backend_izi_bot
-
 networks:
   api_network: 
     driver: bridge
